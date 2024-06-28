@@ -5,16 +5,23 @@ require 'webdrivers'
 require_relative 'strategies/default'
 
 class GoogleArtworkParser
-  attr_reader :file_path, :parser_strategy
+  attr_reader :file_path, :parser_strategy_class, :with_selenium
 
-  def initialize(file_path, parser_strategy = DefaultParserStrategy.new)
+  def initialize(file_path, parser_strategy_class = DefaultParserStrategy, with_selenium = false)
     @file_path = file_path
-    @parser_strategy = parser_strategy
+    @parser_strategy_class = parser_strategy_class
+    @with_selenium = with_selenium
   end
 
   def parse
-    html = load_html
-    artworks = parser_strategy.extract_data(html)
+    html = if with_selenium
+      load_html
+    else
+      File.read(file_path)
+    end
+
+    parser_strategy = @parser_strategy_class.new(html)
+    artworks = parser_strategy.extract_data
 
     save_to_json(artworks)
   end

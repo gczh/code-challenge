@@ -3,10 +3,10 @@ require 'nokolexbor'
 require_relative '../parsers/strategies/default'
 
 RSpec.describe DefaultParserStrategy, "#extract_data" do
-  let(:parser) { DefaultParserStrategy.new }
   let(:html) { File.read('./files/van-gogh-paintings.html') }
+  let(:parser) { DefaultParserStrategy.new(html) }
   let(:doc) { Nokolexbor::HTML(html) }
-  let(:artworks) { parser.extract_data(doc) }
+  let(:artworks) { parser.extract_data }
 
   context "when the artworks are extracted" do
     it "returns an array" do
