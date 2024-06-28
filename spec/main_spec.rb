@@ -12,11 +12,6 @@ describe GoogleArtworkParser do
   it "extracts the artworks to a file" do
     subject
 
-    # Debugging output
-    # puts "Checking if file exists: #{output_file}"
-    # puts "Current directory: #{Dir.pwd}"
-    # puts "Files in output directory: #{Dir['*']}"
-
     expect(File).to exist(output_file)
 
     parsed_output = JSON.parse(File.read(output_file))

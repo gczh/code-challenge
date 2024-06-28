@@ -1,7 +1,4 @@
-require 'nokogiri'
 require 'json'
-require 'pry'
-require 'open-uri'
 require 'selenium-webdriver'
 require 'webdrivers'
 
@@ -17,8 +14,7 @@ class GoogleArtworkParser
 
   def parse
     html = load_html
-    doc = Nokogiri::HTML(html)
-    artworks = parser_strategy.extract_data(doc)
+    artworks = parser_strategy.extract_data(html)
 
     save_to_json(artworks)
   end

@@ -1,11 +1,11 @@
 require 'rspec'
-require 'nokogiri'
+require 'nokolexbor'
 require_relative '../parsers/strategies/default'
 
 RSpec.describe DefaultParserStrategy, "#extract_data" do
   let(:parser) { DefaultParserStrategy.new }
   let(:html) { File.read('./files/van-gogh-paintings.html') }
-  let(:doc) { Nokogiri::HTML(html) }
+  let(:doc) { Nokolexbor::HTML(html) }
   let(:artworks) { parser.extract_data(doc) }
 
   context "when the artworks are extracted" do

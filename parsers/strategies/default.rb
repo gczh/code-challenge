@@ -1,6 +1,10 @@
+require 'nokolexbor'
+
 class DefaultParserStrategy
-  def extract_data(doc)
+  def extract_data(html)
+    doc = Nokolexbor::HTML(html)
     artworks = []
+
     doc.css('a.klitem').each do |artwork|
       name = artwork.attr('aria-label')
       link = "https://www.google.com" + artwork.attr('href')
