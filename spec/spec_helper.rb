@@ -3,6 +3,12 @@ SimpleCov.start do
   add_filter '/spec/'
 end
 
+require 'json'
+require 'bundler/setup'
+Bundler.require(:default, :test)
+
+require_relative '../parsers/google_artwork_parser'
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
